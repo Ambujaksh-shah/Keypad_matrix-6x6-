@@ -15,7 +15,13 @@ _delay_ms(d);
 
 }
 
-volatile char keypad[6][6]={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+volatile char keypad[6][6]={0,1,2,3,4,5,
+                            6,7,8,9,10,11,
+                            12,13,14,15,16,17,
+                            18,19,20,21,22,23,
+                            24,25,26,27,28,29,
+                            30,31,32,33,34,35
+                           };
 
 void main()
 {
@@ -23,25 +29,13 @@ unsigned char col,row;
 
  MCUCSR=0x80;
  MCUCSR=0x80;
- InitLCD(0);
-  LCDClear();
+ 
 //DDRD=0xff;
 Key_DDR=0xC0;
 Key_PRT=0xff;
 Key_DDR1=0x0F;
 Key_PRT1=0xFF;
 
- LCDWriteStringXY(0,0,"system loading....");
- 
- for(int i=0;i<=100;i++)
- {
-   LCDWriteIntXY(0,1,i,3);
-   LCDWriteStringXY(4,1,"%");
-   _delay_ms(20);
-   } 
-    
-  _delay_ms(2000);
-  LCDClear();
 while(1)
 {
 do{
@@ -117,39 +111,37 @@ break;
 
 }
 if(col==0x3E)
- {//LCDClear();
-  //LCDWriteStringXY(1,1,'keypad[row][0]');
- LCDWriteIntXY(3,0,keypad[row][0],2);
-//PORTD=(keypad[row][0]);
+ {
+ PORTD=(keypad[row][0]);
 }
 else if(col==0x3D)
 {
-   LCDWriteIntXY(3,0,keypad[row][1],2);
+ //  LCDWriteIntXY(3,0,keypad[row][1],2);
 
-//PORTD=(keypad[row][1]);
+PORTD=(keypad[row][1]);
 }
 else if(col==0x3B)
 {
-LCDWriteIntXY(3,0,keypad[row][2],2);
-//PORTD=(keypad[row][2]);
+//LCDWriteIntXY(3,0,keypad[row][2],2);
+ PORTD=(keypad[row][2]);
 }
 else if(col==0x37)
 {
 
-LCDWriteIntXY(3,0,keypad[row][3],2);
-//PORTD=(keypad[row][3]);
+//LCDWriteIntXY(3,0,keypad[row][3],2);
+PORTD=(keypad[row][3]);
 }
 else if(col==0x2F)
 {
 
-LCDWriteIntXY(3,0,keypad[row][4],2);
-//PORTD=(keypad[row][3]);
+//LCDWriteIntXY(3,0,keypad[row][4],2);
+PORTD=(keypad[row][3]);
 }
 else if(col==0x1F)
 {
 
-LCDWriteIntXY(3,0,keypad[row][5],2);
-//PORTD=(keypad[row][3]);
+//LCDWriteIntXY(3,0,keypad[row][5],2);
+PORTD=(keypad[row][3]);
 }
 }
 //return 0;
